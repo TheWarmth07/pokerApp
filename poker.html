@@ -1,0 +1,101 @@
+<html>
+  <body>
+    <img src="poker.jpg" style="width:100%;height:100%;"/>
+    
+    <script>
+    
+      
+      // store suits and values in arrays and loop through to store in deck
+    suits = ['Hearts','Diamonds','Clubs','Spades'];
+    values = ['A',2,3,4,5,6,7,8,9,10,'J','Q','K'];
+    deck = [];
+      
+    for (var suit in suits) {
+    for (var value in values) {
+        this.deck.push([suits[suit],values[value]]);
+      }
+    }
+    
+    /*
+    function for shuffling cards based on fisher-yates algorithm
+    while loop uses m to iterate through whole deck, i creates randomization
+    next line switches cards in deck with random i position and m position
+    */
+    
+    function shuffle() {
+      let m = deck.length;
+
+      while (m) {
+        var i = Math.floor(Math.random() * m--);
+        [deck[m], deck[i]] = [deck[i], deck[m]];
+      }
+    }
+    shuffle();
+    
+    //deal your hand
+    var player = [deck.pop(),deck.pop()];
+    //deal opponents hands
+    var opponent = [deck.pop(),deck.pop()]
+    //deal flop, turn and river (do betting afterwards)...
+    var flop = [deck.pop(),deck.pop(),deck.pop()];
+    var turn = deck.pop();
+    var river = deck.pop();
+    //compare all hands
+    var yourHand = [player,flop,turn,river];
+    var opponentHand = [opponent,flop,turn,river];
+    
+    //compare ranks and sort hands
+    var rank = 0;
+    
+    var setHand = [["Hearts",11],["Hearts",10]];
+    var flopTurnRiver = [["Hearts",14],["Hearts",13],["Hearts",12],["Clubs",8],["Diamonds",5]];
+    
+    var fullHand = [setHand[0],setHand[1],flopTurnRiver[0],flopTurnRiver[1],flopTurnRiver[2],flopTurnRiver[3],flopTurnRiver[4]];
+    fullHand.sort();
+    
+    var countSuit = 0;
+    var countNum = 0;
+    //what's going on here take a break
+    var i;
+    
+      if(fullHand[i][0] == fullHand[i+1][0]){
+        countSuit++;
+        i++;
+      }
+    
+    for(i=0;i<fullHand.length;i++){
+      if(fullHand[i] == fullHand[i+1]){
+        countNum++;
+      }
+    }
+    
+    if(countSuit == 5){
+      rank = 5
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+  
+  </script>
+    
+    
+  </body>
+  
+  
+</html>
