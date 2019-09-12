@@ -95,7 +95,14 @@
         }
       }
     }
-    
+    //check for max number of same suit
+    if(countSuit2 > countSuit){
+      countSuit = countSuit2;
+    }
+    if(countSuit3 > countSuit){
+      countSuit = countSuit3;
+    }
+    //check for straight by checking for numbers ascending by 1
     for(var j = 0;j < fullHand.length-1;j++){
       if(fullHand[j][1] == fullHand[j+1][1] - 1){
         countNum++;
