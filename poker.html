@@ -12,7 +12,7 @@
       
     for (var suit in suits) {
     for (var value in values) {
-        this.deck.push([suits[suit],values[value]]);
+        deck.push([suits[suit],values[value]]);
       }
     }
     
@@ -53,26 +53,67 @@
     var fullHand = [setHand[0],setHand[1],flopTurnRiver[0],flopTurnRiver[1],flopTurnRiver[2],flopTurnRiver[3],flopTurnRiver[4]];
     fullHand.sort();
     
-    var countSuit = 0;
-    var countNum = 0;
-    //what's going on here take a break
-    var i;
+    var ranks = {
+      "royalFlush" : 9,
+      "straightFlush" : 8,
+      "fourOfAKind": 7,
+      "fullHouse": 6,
+      "flush": 5,
+      "straight": 4
+      
+    }
+    var yourRank = 0;
     
-      if(fullHand[i][0] == fullHand[i+1][0]){
-        countSuit++;
-        i++;
+    //counters for counting suits
+    
+    var switchSuitCounter = 0;
+    var countSuit = 1;
+    var countSuit2 = 1;
+    var countSuit3 = 1;
+    var countNum = 1;
+    
+    //nested statement to count frequency of suits in hand
+    for(var i = 0;i < fullHand.length-1;i++){
+      if(switchSuitCounter == 0){
+        if(fullHand[i][0] == fullHand[i+1][0]){
+          countSuit++;
+        }else{
+          switchSuitCounter++;
+        }
+      }else if(switchSuitCounter == 1){
+        if(fullHand[i][0] == fullHand[i+1][0]){
+          countSuit2++;
+        }else{
+          switchSuitCounter++;
+        }
       }
+      else if(switchSuitCounter == 2){
+        if(fullHand[i][0] == fullHand[i+1][0]){
+          countSuit3++;
+        }else{
+          switchSuitCounter++;
+        }
+      }
+    }
     
-    for(i=0;i<fullHand.length;i++){
-      if(fullHand[i] == fullHand[i+1]){
+    for(var j = 0;j < fullHand.length-1;j++){
+      if(fullHand[j][1] == fullHand[j+1][1] - 1){
         countNum++;
       }
     }
     
-    if(countSuit == 5){
-      rank = 5
+    if(countSuit >= 5 && countNum >= 5){
+      if(fullHand[6][1] == 14){
+        yourRank = ranks.royalFlush;
+      }else{
+        yourRank = ranks.straightFlush;
+      }
+    }else if(countSuit >= 5){
+      yourRank = ranks.flush;
+    }else if(countNum >= 5) {
+      yourRank = ranks.straight;
     }
-
+    console.log(yourRank);
     
     
     
